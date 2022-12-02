@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+code-input {
+  width: 400px;
+  --item-spacing: 30px;
+  --color: white;
+}
+
+.card-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.add-card {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  mat-icon {
+    font-size: 64px;
+    font-weight: 400;
+    width: 60px;
+    height: 60px;
+  }
+}

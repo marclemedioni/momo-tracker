@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+import { CodeInputModule } from 'angular-code-input';
+import { AdminComponent } from './admin.component';
+import { AdminRoutingModule } from './admin-routing.module';
+import { MaterialModule } from '../../material.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [AdminComponent],
   imports: [
-    CommonModule
-  ]
+    AdminRoutingModule,
+    CodeInputModule,
+    CommonModule,
+    MaterialModule,
+  ],
 })
-export class AdminModule { }
+export class AdminModule {}

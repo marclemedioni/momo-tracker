@@ -1,0 +1,65 @@
+<ng-container *ngIf="!hasAccess">
+  <h1>🔒 Entrez le code de sécurité</h1>
+  <div style="display: block">
+    <code-input [isCodeHidden]="true"
+                [codeLength]="4"
+                (codeCompleted)="onCodeCompleted($event)">
+    </code-input>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="hasAccess">
+  <h1>👋 Welcome Momo !</h1>
+  <mat-tab-group style="width: 100%; height: 100%">
+    <mat-tab label="Emplacements">
+      <div class="card-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Entrée</mat-card-title>
+            <mat-card-subtitle>10 colis</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions align="end">
+            <button mat-button>Editer</button>
+            <button mat-button color="warn">Supprimer</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Armoire</mat-card-title>
+            <mat-card-subtitle>40 colis</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions align="end">
+            <button mat-button>Editer</button>
+            <button mat-button color="warn">Supprimer</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Rayon 1</mat-card-title>
+            <mat-card-subtitle>20 colis</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions align="end">
+            <button mat-button>Editer</button>
+            <button mat-button color="warn">Supprimer</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Rayon 2</mat-card-title>
+            <mat-card-subtitle>5 colis</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions align="end">
+            <button mat-button>Editer</button>
+            <button mat-button color="warn">Supprimer</button>
+          </mat-card-actions>
+        </mat-card>
+        <button class="add-card" mat-raised-button color="accent">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Colis">
+
+    </mat-tab>
+  </mat-tab-group>
+</ng-container>

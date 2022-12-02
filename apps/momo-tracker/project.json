@@ -25,7 +25,7 @@
           "apps/momo-tracker/src/manifest.webmanifest"
         ],
         "styles": [
-          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/momo-tracker/src/theme/material-themes.scss",
           "apps/momo-tracker/src/styles.scss"
         ],
         "scripts": [],
