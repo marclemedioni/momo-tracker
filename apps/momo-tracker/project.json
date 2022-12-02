@@ -7,19 +7,26 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/momo-tracker",
         "index": "apps/momo-tracker/src/index.html",
         "main": "apps/momo-tracker/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/momo-tracker/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/momo-tracker/src/favicon.ico",
           "apps/momo-tracker/src/assets"
         ],
-        "styles": ["apps/momo-tracker/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/momo-tracker/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -78,7 +85,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/momo-tracker/jest.config.ts",
         "passWithNoTests": true
