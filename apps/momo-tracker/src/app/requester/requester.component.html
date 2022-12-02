@@ -1,12 +1,20 @@
-<mat-toolbar>
-  <mat-toolbar-row style="height: 100px">
-    <form [formGroup]="searchForm" style="width: 100%">
-      <mat-form-field style="width: 100%; margin-bottom: -1.25em" appearance="fill">
-        <mat-label>Entrez votre nom</mat-label>
-        <span matPrefix> </span>
-        <input type="search" matInput formControlName="search" >
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </form>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="context">
+  <h1>👋 {{msg}} et bienvenue !</h1>
+  <p>Pour trouver votre colis, entrez votre nom</p>
+</div>
+
+<form [formGroup]="searchForm" style="width: 100%">
+  <mat-form-field style="width: 100%; margin-bottom: -1.25em" appearance="fill">
+    <mat-label>Entrez votre nom</mat-label>
+    <span matPrefix> </span>
+    <input type="search" matInput formControlName="search" >
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</form>
+
+<button mat-raised-button color="primary" class="search">
+  Chercher
+  <mat-icon>search</mat-icon>
+</button>
+
+<span class="time">{{time | date:'mediumTime'}}</span>

@@ -1,3 +1,45 @@
 .full-width {
   width: 100%;
 }
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.context {
+  font: 100 32px/32px Roboto, sans-serif;
+  margin-bottom: 1em;
+}
+
+form {
+  margin-bottom: 3em;
+}
+
+mat-form-field {
+  font-size: 32px;
+}
+
+button.search {
+  height: 100px;
+  width: 100%;
+  font-size: 32px;
+
+  .mat-icon {
+    font-size: 32px;
+    height: unset;
+    width: unset;
+  }
+}
+
+.time {
+  font: 100 24px/32px Roboto, sans-serif;
+  letter-spacing: normal;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

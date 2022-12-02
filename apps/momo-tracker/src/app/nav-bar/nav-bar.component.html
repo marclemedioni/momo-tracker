@@ -15,7 +15,7 @@
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content style="display: flex; flex-direction: column;">
     <mat-toolbar color="primary">
       <button
         type="button"
@@ -27,6 +27,8 @@
       </button>
       <span>Ou est mon colis ?</span>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
