@@ -1,0 +1,12 @@
+<mat-toolbar>
+  <mat-toolbar-row style="height: 100px">
+    <form [formGroup]="searchForm" style="width: 100%">
+      <mat-form-field style="width: 100%; margin-bottom: -1.25em" appearance="fill">
+        <mat-label>Entrez votre nom</mat-label>
+        <span matPrefix> </span>
+        <input type="search" matInput formControlName="search" >
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>

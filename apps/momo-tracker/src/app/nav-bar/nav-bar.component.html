@@ -5,11 +5,11 @@
       >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <mat-list-item>
+      <mat-list-item routerLink="">
         Colis
         <mat-icon matListItemIcon>inventory_2</mat-icon>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="admin">
         Admin
         <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
       </mat-list-item>
@@ -27,5 +27,6 @@
       </button>
       <span>Ou est mon colis ?</span>
     </mat-toolbar>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
