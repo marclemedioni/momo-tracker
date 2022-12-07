@@ -13,17 +13,17 @@
   <mat-tab-group style="width: 100%; height: 100%">
     <mat-tab label="Emplacements">
       <div class="card-container">
-        <mat-card>
+        <mat-card *ngFor="let location of locations$ | async; index as i">
           <mat-card-header>
-            <mat-card-title>Entrée</mat-card-title>
-            <mat-card-subtitle>10 colis</mat-card-subtitle>
+            <mat-card-title>{{location.name}}</mat-card-title>
+            <mat-card-subtitle>{{location.numberOfParcels}} colis</mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions align="end">
             <button mat-button>Editer</button>
-            <button mat-button color="warn">Supprimer</button>
+            <button mat-button color="warn" (click)="remove(location.id)">Supprimer</button>
           </mat-card-actions>
         </mat-card>
-        <mat-card>
+        <!-- <mat-card>
           <mat-card-header>
             <mat-card-title>Armoire</mat-card-title>
             <mat-card-subtitle>40 colis</mat-card-subtitle>
@@ -52,8 +52,8 @@
             <button mat-button>Editer</button>
             <button mat-button color="warn">Supprimer</button>
           </mat-card-actions>
-        </mat-card>
-        <button class="add-card" mat-raised-button color="accent">
+        </mat-card> -->
+        <button class="add-card" mat-raised-button color="accent" (click)="addLocation()">
           <mat-icon>add</mat-icon>
         </button>
       </div>
