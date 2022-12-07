@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (!isDevMode()) {
-      this.updateService.doAppUpdate();
+      this.updateService.subscribeUpdates();
     }
   }
 

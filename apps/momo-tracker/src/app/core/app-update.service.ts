@@ -6,21 +6,21 @@ import { filter } from 'rxjs';
 })
 export class AppUpdateService {
   constructor(private readonly updates: SwUpdate) {
-    this.updates.versionUpdates
-      .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
-      .subscribe(evt => {
-        if (this.promptUser()) {
-          // Reload the page to update to the latest version.
-          document.location.reload();
-        }
-      });
+
   }
 
   promptUser(): boolean {
     return confirm('Nouvelle version disponible')
   }
 
-  doAppUpdate() {
-    this.updates.activateUpdate().then(() => document.location.reload());
+  subscribeUpdates() {
+    this.updates.versionUpdates
+      .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
+      .subscribe(() => {
+        if (this.promptUser()) {
+          // Reload the page to update to the latest version.
+          document.location.reload();
+        }
+      });
   }
 }
