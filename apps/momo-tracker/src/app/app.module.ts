@@ -12,30 +12,41 @@ import { AdminModule } from './admin/admin.module';
 import { RequesterModule } from './requester/requester.module';
 import { MaterialModule } from '../material.module';
 import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
+import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm-dialog.component';
 
-const dbConfig: DBConfig  = {
+const dbConfig: DBConfig = {
   name: 'MyDb',
   version: 1,
-  objectStoresMeta: [{
-    store: 'parcels',
-    storeConfig: { keyPath: 'id', autoIncrement: true },
-    storeSchema: [
-      { name: 'recipientName', keypath: 'recipientName', options: { unique: false } },
-      { name: 'size', keypath: 'size', options: { unique: false } },
-    ]
-  }, {
-    store: 'locations',
-    storeConfig: { keyPath: 'id', autoIncrement: true },
-    storeSchema: [
-      { name: 'name', keypath: 'name', options: { unique: false } },
-      { name: 'numberOfParcels', keypath: 'numberOfParcels', options: { unique: false } },
-    ]
-  }]
+  objectStoresMeta: [
+    {
+      store: 'parcels',
+      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        {
+          name: 'recipientName',
+          keypath: 'recipientName',
+          options: { unique: false },
+        },
+        { name: 'size', keypath: 'size', options: { unique: false } },
+      ],
+    },
+    {
+      store: 'locations',
+      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        { name: 'name', keypath: 'name', options: { unique: false } },
+        {
+          name: 'numberOfParcels',
+          keypath: 'numberOfParcels',
+          options: { unique: false },
+        },
+      ],
+    },
+  ],
 };
 
-
 @NgModule({
-  declarations: [AppComponent, NavBarComponent],
+  declarations: [AppComponent, NavBarComponent, ConfirmDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -44,15 +55,16 @@ const dbConfig: DBConfig  = {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
     LayoutModule,
     AdminModule,
     MaterialModule,
     RequesterModule,
-    NgxIndexedDBModule.forRoot(dbConfig)
+    NgxIndexedDBModule.forRoot(dbConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [ConfirmDialogComponent],
 })
 export class AppModule {}

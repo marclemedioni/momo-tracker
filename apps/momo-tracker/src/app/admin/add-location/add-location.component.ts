@@ -5,23 +5,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   template: `
     <h1 mat-dialog-title>Ajouter un emplacement</h1>
-    <mat-dialog-content>
-      <form [formGroup]="addForm">
+    <form [formGroup]="addForm" (ngSubmit)="add()">
+      <mat-dialog-content>
         <mat-form-field appearance="outline">
           <mat-label>Nom</mat-label>
-          <input type="text" matInput formControlName="name">
+          <input type="text" matInput formControlName="name" />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Nombre de colis</mat-label>
-          <input type="number" matInput formControlName="numberOfParcels">
+          <input type="number" matInput formControlName="numberOfParcels" />
         </mat-form-field>
-      </form>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button>Annuler</button>
-      <button mat-raised-button color="primary" (click)="add()">Ajouter</button>
-    </mat-dialog-actions>
-  `
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button>Annuler</button>
+        <button type="submit" mat-raised-button color="primary">Ajouter</button>
+      </mat-dialog-actions>
+    </form>
+  `,
 })
 export class AddLocationComponent {
   addForm!: FormGroup;
@@ -32,8 +32,8 @@ export class AddLocationComponent {
   ) {
     this.addForm = this.fb.group({
       name: [''],
-      numberOfParcels: 10
-    })
+      numberOfParcels: 10,
+    });
   }
 
   add() {
