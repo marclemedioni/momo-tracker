@@ -10,11 +10,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { RequesterModule } from './requester/requester.module';
-import { MaterialModule } from '../material.module';
-import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, ConfirmDialogComponent],
+  declarations: [AppComponent, NavBarComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -27,11 +25,10 @@ import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm
     }),
     LayoutModule,
     AdminModule,
-    MaterialModule,
     RequesterModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [ConfirmDialogComponent],
+  exports: [],
 })
 export class AppModule {}

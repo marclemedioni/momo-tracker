@@ -1,5 +1,4 @@
-<h1 class="mat-display-1">Résultat de la recherche: "{{searchTerms}}"</h1>
-<mat-divider></mat-divider>
+<h1>Résultat de la recherche: "{{searchTerms}}"</h1>
 <ng-container *ngIf="parcels$ | async as parcels">
   <ng-container *ngIf="!parcels.length">
 
@@ -10,19 +9,11 @@
     </div>
 
     <div class="card-container">
-      <mat-card *ngFor="let parcel of parcels; trackBy: identify">
-        <mat-card-header>
-          <mat-card-title>
-            {{parcel.recipient.lastName}}
-          </mat-card-title>
-          <mat-card-subtitle>Arrivé le {{parcel.receivedAt | date}}</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-actions align="end">
-          <!-- <button mat-button>Editer</button>
-              <button mat-button color="warn" (click)="remove(location)">Supprimer</button> -->
-        </mat-card-actions>
-      </mat-card>
+      <ul>
+        <li *ngFor="let parcel of parcels; trackBy: identify">
+          {{parcel.recipient.lastName}} - Arrivé le {{parcel.receivedAt | date}}
+        </li>
+      </ul>
     </div>
   </div>
 </ng-container>

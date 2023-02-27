@@ -17,7 +17,6 @@
     "@angular/compiler": "15.1.5",
     "@angular/core": "15.1.5",
     "@angular/forms": "15.1.5",
-    "@angular/material": "15.1.6",
     "@angular/platform-browser": "15.1.5",
     "@angular/platform-browser-dynamic": "15.1.5",
     "@angular/pwa": "^15.0.2",
