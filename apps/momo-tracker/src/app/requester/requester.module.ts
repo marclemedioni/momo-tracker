@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RequesterRoutingModule } from './requester-routing.module';
-import { RequesterComponent } from './requester.component';
+import { HomeComponent } from './components/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
-  declarations: [RequesterComponent],
+  declarations: [HomeComponent, SearchComponent],
   imports: [
     CommonModule,
     FormsModule,

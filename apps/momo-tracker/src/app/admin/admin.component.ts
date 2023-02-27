@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Observable, switchMap } from 'rxjs';
+import { Location } from '@momo-tracker/models';
+import { liveQuery } from 'dexie';
+import { of, switchMap } from 'rxjs';
 import {
   ConfirmDialogComponent,
   ConfirmDialogModel,
@@ -15,15 +17,13 @@ import { AddLocationComponent } from './add-location/add-location.component';
 })
 export class AdminComponent {
   hasAccess = true;
-  locations$!: Observable<Array<any>>;
-  addLocationDialogRef!: MatDialogRef<AddLocationComponent>;
+  locations$ = liveQuery(() => this.locationService.getAll());
+  addLocationDialogRef!: MatDialogRef<AddLocationComponent, Location>;
 
   constructor(
     private locationService: LocationService,
     public dialog: MatDialog
-  ) {
-    this.refreshLocations();
-  }
+  ) {}
 
   onCodeCompleted(code: string) {
     if (code === '1234') {
@@ -32,7 +32,7 @@ export class AdminComponent {
   }
 
   refreshLocations() {
-    this.locations$ = this.locationService.getAll();
+    this.locations$ = liveQuery(() => this.locationService.getAll());
   }
 
   addLocation() {
@@ -40,8 +40,12 @@ export class AdminComponent {
     this.addLocationDialogRef
       .afterClosed()
       .pipe(
-        switchMap((result: any) => {
-          return this.locationService.addLocation(result);
+        switchMap((result) => {
+          if (result) {
+            return this.locationService.addLocation(result);
+          } else {
+            return of(null);
+          }
         })
       )
       .subscribe(() => {
@@ -49,7 +53,7 @@ export class AdminComponent {
       });
   }
 
-  remove(location: any) {
+  remove(location: Location) {
     const dialogData = new ConfirmDialogModel(
       'Confirmation',
       `Supprimer l'emplacement ${location.name} ?`
@@ -60,11 +64,11 @@ export class AdminComponent {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.locationService.removeLocationById(location.id).subscribe(() => {
-          this.refreshLocations();
-        });
+    dialogRef.afterClosed().subscribe(async (dialogResult) => {
+      if (dialogResult && location.id) {
+        await this.locationService.removeLocationById(location.id);
+
+        this.refreshLocations();
       }
     });
   }

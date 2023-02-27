@@ -12,7 +12,6 @@
 }
 
 .context {
-  font: 100 2em/2em Roboto, sans-serif;
   margin-bottom: 1em;
 }
 
@@ -20,22 +19,13 @@ form {
   margin-bottom: 3em;
 }
 
-button.search {
-  height: 100px;
-  width: 100%;
-  font-size: 32px;
-
-  .mat-icon {
-    font-size: 32px;
-    height: unset;
-    width: unset;
-  }
-}
-
 .time {
-  font: 100 24px/32px Roboto, sans-serif;
   letter-spacing: normal;
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.no-data {
+  pointer-events: none;
 }

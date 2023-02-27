@@ -1,0 +1,17 @@
+<h1>👋 {{msg}} et bienvenue !</h1>
+<p>Pour trouver votre colis, entrez votre nom</p>
+
+<form [formGroup]="searchForm" style="width: 100%;" (ngSubmit)="search()">
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Entrez votre nom</mat-label>
+    <input type="text" matInput [matAutocomplete]="auto" formControlName="search">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of parcels$ | async" [value]="option" [ngClass]="_allowSelection(option)">
+        {{option.recipient.lastName}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</form>
+
+<span class="time">{{time | date:'mediumTime'}}</span>

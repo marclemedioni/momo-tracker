@@ -7,20 +7,15 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../../material.module';
 import { AddLocationComponent } from './add-location/add-location.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxIndexedDBModule } from 'ngx-indexed-db';
 
 @NgModule({
-  declarations: [
-    AdminComponent,
-    AddLocationComponent,
-  ],
+  declarations: [AdminComponent, AddLocationComponent],
   imports: [
     AdminRoutingModule,
     CodeInputModule,
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    NgxIndexedDBModule
-  ]
+  ],
 })
 export class AdminModule {}

@@ -1,0 +1,37 @@
+h1 {
+  margin: 0
+}
+
+.content {
+  margin-top: 1em;
+}
+
+.results {
+  margin-top: 1em;
+}
+
+.result-count {
+  width: 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, .5);
+  padding: 1em;
+  border-radius: 1em;
+  font-size: 1em;
+}
+
+.card-icon {
+    font-size: 30px;
+}
+
+.card-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.left-icon {
+  background: red;
+  height: 100%;
+}

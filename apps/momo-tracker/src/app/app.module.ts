@@ -11,39 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { RequesterModule } from './requester/requester.module';
 import { MaterialModule } from '../material.module';
-import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 import { ConfirmDialogComponent } from './core/components/confirm-dialog/confirm-dialog.component';
-
-const dbConfig: DBConfig = {
-  name: 'MyDb',
-  version: 1,
-  objectStoresMeta: [
-    {
-      store: 'parcels',
-      storeConfig: { keyPath: 'id', autoIncrement: true },
-      storeSchema: [
-        {
-          name: 'recipientName',
-          keypath: 'recipientName',
-          options: { unique: false },
-        },
-        { name: 'size', keypath: 'size', options: { unique: false } },
-      ],
-    },
-    {
-      store: 'locations',
-      storeConfig: { keyPath: 'id', autoIncrement: true },
-      storeSchema: [
-        { name: 'name', keypath: 'name', options: { unique: false } },
-        {
-          name: 'numberOfParcels',
-          keypath: 'numberOfParcels',
-          options: { unique: false },
-        },
-      ],
-    },
-  ],
-};
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent, ConfirmDialogComponent],
@@ -61,7 +29,6 @@ const dbConfig: DBConfig = {
     AdminModule,
     MaterialModule,
     RequesterModule,
-    NgxIndexedDBModule.forRoot(dbConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],

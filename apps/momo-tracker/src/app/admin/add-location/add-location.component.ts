@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Location } from '@momo-tracker/models';
 
 @Component({
   template: `
@@ -24,17 +25,15 @@ import { MatDialogRef } from '@angular/material/dialog';
   `,
 })
 export class AddLocationComponent {
-  addForm!: FormGroup;
+  addForm = this.fb.nonNullable.group<Omit<Location, 'id'>>({
+    name: '',
+    numberOfParcels: 10,
+  });
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddLocationComponent>
-  ) {
-    this.addForm = this.fb.group({
-      name: [''],
-      numberOfParcels: 10,
-    });
-  }
+  ) {}
 
   add() {
     this.dialogRef.close(this.addForm.value);

@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
-import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { db } from '@momo-tracker/database';
+import { Location } from '@momo-tracker/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocationService {
-  constructor(private dataBase: NgxIndexedDBService) {}
+  constructor() {}
 
   getAll() {
-    return this.dataBase.getAll('locations');
+    return db.locations.toArray();
   }
 
-  // TODO Add types
-  addLocation(location: any) {
-    return this.dataBase.add('locations', location);
+  addLocation(location: Location) {
+    return db.locations.add(location);
   }
 
   removeLocationById(locationId: number) {
-    return this.dataBase.deleteByKey('locations', locationId);
+    return db.locations.delete(locationId);
   }
 }
