@@ -13,8 +13,8 @@ import { ParcelService } from '../../../core/services/parcel.service';
 })
 export class HomeComponent implements OnInit {
   searchForm!: FormGroup;
-  parcels$!: Observable<Parcel[]> | undefined;
-  time!: Date;
+  parcels$!: Observable<Parcel[] | null> | undefined;
+  time = new Date();
   hours!: number;
   msg!: string;
 
@@ -32,22 +32,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      search: [''],
+      search: ['yve'],
     });
 
     this.parcels$ = this.searchForm.get('search')?.valueChanges.pipe(
+      startWith('yve'),
       switchMap((searchTerms) => {
         if (!searchTerms) {
           return of(null);
         }
         return liveQuery(() => this.ParcelService.search(searchTerms));
-      }),
-      map((parcels) => {
-        if (parcels && parcels.length > 0) {
-          return parcels;
-        } else {
-          return [{ id: 0, recipient: { lastName: 'No data' } } as Parcel];
-        }
       })
     );
   }

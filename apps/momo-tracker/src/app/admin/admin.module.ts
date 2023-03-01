@@ -5,6 +5,7 @@ import { CodeInputModule } from 'angular-code-input';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../../material.module';
 
 @NgModule({
   declarations: [AdminComponent],
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CodeInputModule,
     CommonModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
 })
 export class AdminModule {}

@@ -1,13 +1,43 @@
-<h1>👋 {{msg}} et bienvenue !</h1>
-<p>Pour trouver votre colis, entrez votre nom</p>
+<div class="h-full w-full flex flex-col items-center pt-5">
+  <div class="w-2/3">
+    <h1 class="text-4xl">👋 {{msg}} et bienvenue !</h1>
+    <p class="font-thin">Pour trouver votre colis, entrez votre nom</p>
 
-<form [formGroup]="searchForm" (ngSubmit)="search()">
-  <input type="text" formControlName="search">
-  <ul>
-    <li *ngFor="let option of parcels$ | async">
-      {{option.recipient.lastName}}
-    </li>
-  </ul>
-</form>
+    <form [formGroup]="searchForm" (ngSubmit)="search()" class="mt-5">
+      <input type="text" formControlName="search" class="p-5 bg-neutral-600 text-3xl rounded-lg border-none w-full">
 
-<span class="time">{{time | date:'mediumTime'}}</span>
+      <ul class="mt-5" *ngIf="parcels$ | async as parcels">
+        <ng-container *ngIf="parcels.length">
+          <li *ngFor="let option of parcels" class="w-full flex">
+            <div class="h-auto px-7 flex items-center justify-center text-5xl">
+              📦
+            </div>
+            <div class="bg-neutral-600 p-5 flex flex-col justify-between leading-normal w-full rounded-lg">
+              <div class="font-bold text-xl mb-2">
+                Colis au nom de "{{option.recipient.lastName}}"
+              </div>
+              <div class="text-sm">
+                <p class="leading-none">Arrivé le {{option.receivedAt | date }}</p>
+              </div>
+            </div>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="!parcels.length">
+          <div class="w-full flex">
+            <div class="h-auto px-7 flex items-center justify-center text-5xl">
+              🧐
+            </div>
+            <div class="bg-neutral-600 p-5 flex flex-col justify-between leading-normal w-full rounded-lg">
+              <div class="font-bold text-xl mb-2">
+                Impossible de trouver votre colis
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ul>
+    </form>
+  </div>
+
+  <span class="absolute bottom-5 right-5">{{time | date:'mediumTime'}}</span>
+</div>

@@ -10,6 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { RequesterModule } from './requester/requester.module';
+import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent],
@@ -26,6 +27,7 @@ import { RequesterModule } from './requester/requester.module';
     LayoutModule,
     AdminModule,
     RequesterModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
