@@ -7,16 +7,12 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/momo-tracker",
         "index": "apps/momo-tracker/src/index.html",
         "main": "apps/momo-tracker/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
+        "polyfills": ["zone.js"],
         "tsConfig": "apps/momo-tracker/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -63,10 +59,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "momo-tracker:build:production"
+          "buildTarget": "momo-tracker:build:production"
         },
         "development": {
-          "browserTarget": "momo-tracker:build:development"
+          "buildTarget": "momo-tracker:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -74,11 +70,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "momo-tracker:build"
+        "buildTarget": "momo-tracker:build"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "apps/momo-tracker/**/*.ts",
@@ -87,13 +83,10 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/momo-tracker/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/momo-tracker/jest.config.ts"
       }
     }
   },
