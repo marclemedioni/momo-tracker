@@ -1,0 +1,12 @@
+<p>add-parcel works!</p>
+
+<div id="stream" *ngIf="!snapshot">
+  <button (click)="takeSnapshot()">Take</button>
+  <video autoplay="true"></video>
+</div>
+<div id="validation" *ngIf="snapshot">
+  <button (click)="deleteSnapshot()">X</button>
+  ----------------
+  <button (click)="validateSnapshot()">Go</button>
+  <img src="" alt="snapshot preview" id="preview" />
+</div>

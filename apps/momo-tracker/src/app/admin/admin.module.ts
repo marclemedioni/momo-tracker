@@ -6,9 +6,14 @@ import { AdminComponent } from './admin.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
+import { MatTabRouterLinkActiveDirective } from '../core/directives/active-tab/active-tab.directive';
+import { AddLocationComponent } from './add-location/add-location.component';
+import { AddParcelComponent } from './add-parcel/add-parcel.component';
+import { LocationsComponent } from './locations/locations.component';
+import { ParcelsComponent } from './parcels/parcels.component';
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [AddLocationComponent, AddParcelComponent, LocationsComponent, ParcelsComponent, AdminComponent, MatTabRouterLinkActiveDirective],
   imports: [
     AdminRoutingModule,
     CodeInputModule,

@@ -10,26 +10,12 @@
 
 <ng-container *ngIf="hasAccess">
   <h1>👋 Welcome Momo !</h1>
-  <mat-tab-group style="width: 100%; height: 100%">
-    <mat-tab label="Emplacements">
-      <div class="card-container">
-        <mat-card appearance="outlined" *ngFor="let location of locations$ | async; index as i">
-          <mat-card-header>
-            <mat-card-title>{{location.name}}</mat-card-title>
-            <mat-card-subtitle>{{location.numberOfParcels}} colis</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-actions align="end">
-            <button mat-button>Editer</button>
-            <button mat-button color="warn" (click)="remove(location)">Supprimer</button>
-          </mat-card-actions>
-        </mat-card>
-        <button class="add-card" mat-raised-button color="accent" (click)="addLocation()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </mat-tab>
-    <mat-tab label="Colis">
 
-    </mat-tab>
-  </mat-tab-group>
+   <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+ <a mat-tab-link [routerLink]="['locations']" mtTabLink routerLinkActive>Emplacements</a>
+  <a mat-tab-link [routerLink]="['parcels']" mtTabLink routerLinkActive>Colis</a>
+</nav>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>
 </ng-container>

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@momo-tracker/models';
-import { liveQuery } from 'dexie';
-import { LocationService } from '../core/services/location.service';
+
 @Component({
   selector: 'mt-admin',
   templateUrl: './admin.component.html',
@@ -9,9 +8,8 @@ import { LocationService } from '../core/services/location.service';
 })
 export class AdminComponent {
   hasAccess = true;
-  locations$ = liveQuery(() => this.locationService.getAll());
 
-  constructor(private locationService: LocationService) {}
+  constructor() {}
 
   onCodeCompleted(code: string) {
     if (code === '1234') {
@@ -19,9 +17,7 @@ export class AdminComponent {
     }
   }
 
-  refreshLocations() {
-    this.locations$ = liveQuery(() => this.locationService.getAll());
-  }
+
 
   addLocation() {
     // this.addLocationDialogRef = this.dialog.open(AddLocationComponent);
