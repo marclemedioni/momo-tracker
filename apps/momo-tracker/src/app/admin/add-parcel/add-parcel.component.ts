@@ -10,7 +10,8 @@ export class AddParcelComponent {
   worker!: Tesseract.Worker
   video!: HTMLVideoElement | null;
   snapshot!: string | null;
-  result!: Tesseract.Page;
+  canvas!: HTMLCanvasElement;
+  result!: string;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {
 
@@ -58,23 +59,23 @@ export class AddParcelComponent {
     const width = this.video?.offsetWidth || 100;
     const height = this.video?.offsetHeight || 100;
 
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = width;
+    this.canvas.height = height;
 
-    const context = canvas.getContext('2d');
+    const context = this.canvas.getContext('2d');
     if (context && this.video) {
       context.drawImage(this.video, 0, 0, width, height);
     }
 
-    this.snapshot = canvas.toDataURL('image/jpeg', 1);
+    this.snapshot = this.canvas.toDataURL('image/jpeg', 1);
 
     setTimeout(() => {
       const img: HTMLImageElement = document.getElementById(
         'preview'
       ) as HTMLImageElement;
 
-      img.src = canvas.toDataURL('image/jpeg', 1);
+      img.src = this.canvas.toDataURL('image/jpeg', 1);
     });
   }
 
@@ -84,9 +85,10 @@ export class AddParcelComponent {
       return;
     }
 
-    const ret = await this.worker.recognize(this.snapshot)
+    const ret = await this.worker.recognize(this.canvas)
+    console.log(ret.data.text)
 
-    this.result = ret.data
+    this.result = ret.data.text
   }
 
   deleteSnapshot() {
