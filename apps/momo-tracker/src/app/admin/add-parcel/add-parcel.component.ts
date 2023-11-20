@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { createWorker } from "tesseract.js";
 
 @Component({
   selector: 'mt-add-parcel',
@@ -6,13 +7,22 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
   styleUrls: ['./add-parcel.component.scss'],
 })
 export class AddParcelComponent {
+  worker!: Tesseract.Worker
   video!: HTMLVideoElement | null;
   snapshot!: string | null;
+  result!: Tesseract.Page;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
 
-  ngAfterViewInit() {
+  }
+
+  async ngAfterViewInit() {
+    await this.createWorker();
     this.openCamera();
+  }
+
+  async createWorker() {
+    this.worker = await createWorker();
   }
 
   openCamera() {
@@ -68,8 +78,15 @@ export class AddParcelComponent {
     });
   }
 
-  validateSnapshot() {
+  async validateSnapshot() {
     console.log('validateSnapshot');
+    if (!this.snapshot) {
+      return;
+    }
+
+    const ret = await this.worker.recognize(this.snapshot)
+
+    this.result = ret.data
   }
 
   deleteSnapshot() {
