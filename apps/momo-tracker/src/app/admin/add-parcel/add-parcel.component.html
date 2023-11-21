@@ -1,14 +1,18 @@
-<p>add-parcel works!</p>
-
-<div id="stream" *ngIf="!snapshot">
-  <button (click)="takeSnapshot()">Take</button>
-  <video autoplay="true"></video>
-</div>
-<div id="validation" *ngIf="snapshot">
-  <button (click)="deleteSnapshot()">X</button>
-  ----------------
-  <button (click)="validateSnapshot()">Go</button>
-  <img src="" alt="snapshot preview" id="preview" />
+<div class="camera-container" [style.display]="!captured && mediaStream ? 'block' : 'none'">
+  <video #videoElement></video>
+  <div class="recognition-rectangle"></div>
+  <canvas #canvasElement width="640" height="480" style="display:none;"></canvas>
 </div>
 
-<pre>{{result |json }}</pre>
+<button (click)="captureImage()" class="fab-button" mat-fab color="primary" *ngIf="!captured">
+  <mat-icon>photo_camera</mat-icon>
+</button>
+
+<button (click)="cancelImage()" class="fab-button" mat-fab *ngIf="captured">
+  <mat-icon>close</mat-icon>
+</button>
+
+<div style="position: relative;" *ngIf="captured">
+  <img src="{{imageWithHighlights}}" #capturedImage (load)="onImageLoad()">
+  <div id="overlay-container" style="position: absolute; top: 0; left: 0;"></div>
+</div>
