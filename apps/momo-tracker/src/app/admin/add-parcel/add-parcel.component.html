@@ -1,18 +1,34 @@
-<div class="camera-container" [style.display]="!captured && mediaStream ? 'block' : 'none'">
+<div class="camera-container" [style.display]="!captured && mediaStream ? 'block' : 'none'" (click)="captureImage()">
   <video #videoElement></video>
   <div class="recognition-rectangle"></div>
   <canvas #canvasElement width="640" height="480" style="display:none;"></canvas>
 </div>
 
-<button (click)="captureImage()" class="fab-button" mat-fab color="primary" *ngIf="!captured">
-  <mat-icon>photo_camera</mat-icon>
-</button>
+<mat-spinner  *ngIf="captured && scanning"></mat-spinner>
 
-<button (click)="cancelImage()" class="fab-button" mat-fab *ngIf="captured">
-  <mat-icon>close</mat-icon>
-</button>
-
-<div style="position: relative;" *ngIf="captured">
+<div style="position: relative;" *ngIf="captured && !scanning">
   <img src="{{imageWithHighlights}}" #capturedImage (load)="onImageLoad()">
   <div id="overlay-container" style="position: absolute; top: 0; left: 0;"></div>
+  <button (click)="cancelImage()" class="fab-button gray" mat-fab *ngIf="captured">
+  <mat-icon>close</mat-icon>
+</button>
 </div>
+<form [formGroup]="parcelForm" (ngSubmit)="addParcel()" novalidate>
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input type="text" matInput formControlName="lastName" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Prénom</mat-label>
+      <input type="text" matInput formControlName="firstName" />
+    </mat-form-field>
+    <mat-label>Taille du colis</mat-label>
+    <mat-button-toggle-group formControlName="size">
+      <mat-button-toggle value="small">Petit</mat-button-toggle>
+      <mat-button-toggle value="medium">Moyen</mat-button-toggle>
+      <mat-button-toggle value="large">Grand</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-label>Numéro du colis</mat-label>
+
+  </form>

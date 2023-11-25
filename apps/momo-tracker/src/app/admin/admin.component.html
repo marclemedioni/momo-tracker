@@ -9,8 +9,6 @@
 </ng-container>
 
 <ng-container *ngIf="hasAccess">
-  <h1>👋 Welcome Momo !</h1>
-
    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
  <a mat-tab-link [routerLink]="['locations']" mtTabLink routerLinkActive>Emplacements</a>
   <a mat-tab-link [routerLink]="['parcels']" mtTabLink routerLinkActive>Colis</a>

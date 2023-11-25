@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import * as Tesseract from 'tesseract.js';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Tesseract from 'tesseract.js';
 
 interface WordInfo {
   text: string;
@@ -26,7 +27,14 @@ export class AddParcelComponent implements AfterViewInit, OnDestroy  {
   imageWithHighlights!: string;
   wordsInfo: WordInfo[] = [];
 
-  constructor() { }
+  parcelForm: FormGroup = this._formBuilder.group({
+    lastName: ['', Validators.required],
+    firstName: ['', Validators.required],
+    size: ['small', Validators.required],
+  });
+
+
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngAfterViewInit(): void {
     this.setupCamera();
@@ -137,8 +145,14 @@ export class AddParcelComponent implements AfterViewInit, OnDestroy  {
   }
 
   onWordClick(word: WordInfo): void {
-    alert(word.text);
-    // Réagir à la sélection du mot ici
+    for (const field of ['lastName', 'firstName']) { // 'field' is a string
+      const control = this.parcelForm.get(field); // 'control' is a FormControl
+      if (control && !control.value) {
+        control.setValue(word.text);
+        return;
+      }
+
+    }
   }
 
   ngOnDestroy(): void {
@@ -149,5 +163,9 @@ export class AddParcelComponent implements AfterViewInit, OnDestroy  {
     if (this.mediaStream) {
       this.mediaStream.getTracks().forEach(track => track.stop());
     }
+  }
+
+  addParcel() {
+
   }
 }
