@@ -11,10 +11,13 @@ import { AddLocationComponent } from './add-location/add-location.component';
 import { AddParcelComponent } from './add-parcel/add-parcel.component';
 import { LocationsComponent } from './locations/locations.component';
 import { ParcelsComponent } from './parcels/parcels.component';
+import { EditLocationComponent } from './edit-location/edit-location.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [AddLocationComponent, AddParcelComponent, LocationsComponent, ParcelsComponent, AdminComponent, MatTabRouterLinkActiveDirective],
+  declarations: [AddLocationComponent, EditLocationComponent, AddParcelComponent, LocationsComponent, ParcelsComponent, AdminComponent, MatTabRouterLinkActiveDirective],
   imports: [
+        RouterModule,
     AdminRoutingModule,
     CodeInputModule,
     CommonModule,

@@ -5,6 +5,8 @@ import { LocationsComponent } from './locations/locations.component';
 import { ParcelsComponent } from './parcels/parcels.component';
 import { AddParcelComponent } from './add-parcel/add-parcel.component';
 import { AddLocationComponent } from './add-location/add-location.component';
+import { EditLocationComponent } from './edit-location/edit-location.component';
+import { LocationResolver } from '../core/resolvers/location.resolver';
 
 const routes: Routes = [
   {
@@ -15,7 +17,8 @@ const routes: Routes = [
       {
         path: 'locations', children: [
           { path: '', component: LocationsComponent, },
-          { path: 'add', component: AddLocationComponent }
+          { path: 'add', component: AddLocationComponent },
+          { path: 'edit/:id', component: EditLocationComponent, resolve: { location: LocationResolver }, }
       ] },
       {
         path: 'parcels', children: [

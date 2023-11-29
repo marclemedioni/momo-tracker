@@ -13,7 +13,7 @@
   <mat-icon>close</mat-icon>
 </button>
 </div>
-<form [formGroup]="parcelForm" (ngSubmit)="addParcel()" novalidate>
+<form [formGroup]="parcelForm" (ngSubmit)="addParcel()" novalidate #form="ngForm">
     <mat-form-field>
       <mat-label>Nom</mat-label>
       <input type="text" matInput formControlName="lastName" />
@@ -22,13 +22,24 @@
       <mat-label>Prénom</mat-label>
       <input type="text" matInput formControlName="firstName" />
     </mat-form-field>
-    <mat-label>Taille du colis</mat-label>
-    <mat-button-toggle-group formControlName="size">
-      <mat-button-toggle value="small">Petit</mat-button-toggle>
-      <mat-button-toggle value="medium">Moyen</mat-button-toggle>
-      <mat-button-toggle value="large">Grand</mat-button-toggle>
-    </mat-button-toggle-group>
+    <mat-form-field floatLabel="always">
+      <mat-label class="w-full">Taille du colis</mat-label>
+       <input style="display: none" formControlName="size" matInput />
+      <mat-button-toggle-group matInput class="w-full" formControlName="size">
+        <mat-button-toggle value="small">Petit</mat-button-toggle>
+        <mat-button-toggle value="medium">Moyen</mat-button-toggle>
+        <mat-button-toggle value="large">Grand</mat-button-toggle>
+      </mat-button-toggle-group>
+    </mat-form-field>
 
-    <mat-label>Numéro du colis</mat-label>
+    <mat-form-field class="w-full flex flex-row justify-center mx-auto" floatLabel="always">
+      <input style="display: none" matInput />
+      <mat-label class="w-full">Numéro du colis</mat-label>
+      <div class="w-full flex flex-col justify-center items-center">
+        <div class="big flex flex-col justify-center items-center">{{bestLocation?.shortName}}{{uniqNumber}}</div>
+      </div>
+    </mat-form-field>
 
+
+    <button mat-raised-button type="submit" color="primary">Enregistrer</button>
   </form>

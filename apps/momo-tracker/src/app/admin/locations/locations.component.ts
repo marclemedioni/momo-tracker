@@ -19,7 +19,9 @@ export class LocationsComponent {
     this.locations$ = liveQuery(() => this.locationService.getAll());
    }
 
-  remove(location: Location) {
-    console.log(location)
+  async remove(location: Location) {
+    if (location.id) {
+      await this.locationService.removeById(location.id)
+    }
   }
 }

@@ -1,6 +1,12 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import Tesseract from 'tesseract.js';
+import { StorageAllocator } from '@momo-tracker/storage-allocator';
+import { LocationService } from '../../core/services/location.service';
+import { UniqNumberService } from '../../core/services/uniq-number.service';
+import { ParcelService } from '../../core/services/parcel.service';
+import { Location, Parcel } from '@momo-tracker/models';
+import { Router } from '@angular/router';
 
 interface WordInfo {
   text: string;
@@ -13,7 +19,7 @@ interface WordInfo {
   templateUrl: './add-parcel.component.html',
   styleUrls: ['./add-parcel.component.scss'],
 })
-export class AddParcelComponent implements AfterViewInit, OnDestroy  {
+export class AddParcelComponent implements AfterViewInit, OnDestroy, OnInit  {
 
   @ViewChild('capturedImage') capturedImage!: ElementRef;
   @ViewChild('videoElement') videoElement!: ElementRef;
@@ -25,16 +31,41 @@ export class AddParcelComponent implements AfterViewInit, OnDestroy  {
   captured = false;
   textResult = '';
   imageWithHighlights!: string;
+  uniqNumber!: number | null;
+  bestLocation!: Location | null;
   wordsInfo: WordInfo[] = [];
 
-  parcelForm: FormGroup = this._formBuilder.group({
+  parcelForm = this.fb.group({
     lastName: ['', Validators.required],
     firstName: ['', Validators.required],
-    size: ['small', Validators.required],
+    locationId: new FormControl<number | null>(null, { validators:[Validators.required], nonNullable: true}),
+    size: new FormControl<Parcel['size']|null>(null ,{ validators:[Validators.required], nonNullable: true}),
   });
 
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private fb: NonNullableFormBuilder, private locationService: LocationService, private uniqNumberService: UniqNumberService, private parcelService: ParcelService,  private router: Router) { }
+
+  async ngOnInit() {
+    const locations = await this.locationService.getAll();
+    this.parcelForm.get('size')?.valueChanges.subscribe(async (selectedValue) => {
+      this.bestLocation = null;
+      this.uniqNumber = null;
+
+      const storageAllocator = new StorageAllocator([...locations]);
+      if (!selectedValue) {
+        return;
+      }
+
+      this.bestLocation = storageAllocator.findBestZone(selectedValue)
+
+      if (this.bestLocation) {
+        this.parcelForm.patchValue({locationId: this.bestLocation.id})
+        this.uniqNumber = await this.uniqNumberService.getFirstAvailable(this.bestLocation.shortName);
+      }
+    })
+
+    this.parcelForm.updateValueAndValidity();
+  }
 
   ngAfterViewInit(): void {
     this.setupCamera();
@@ -125,8 +156,6 @@ export class AddParcelComponent implements AfterViewInit, OnDestroy  {
     const container = document.getElementById('overlay-container');
     const scaleFactor = this.calculateScaleFactor();
 
-    console.log(scaleFactor)
-
     if (!container) {
       return
     }
@@ -165,7 +194,25 @@ export class AddParcelComponent implements AfterViewInit, OnDestroy  {
     }
   }
 
-  addParcel() {
+  async addParcel() {
+    if (!this.parcelForm.valid) {
+      return;
+    }
 
+    const parcel = this.parcelForm.getRawValue();
+    await this.parcelService.add({
+      locationId: parcel.locationId as number,
+      size: parcel.size as Parcel['size'],
+      recipient: {
+        firstName: parcel.firstName,
+        lastName: parcel.lastName
+      },
+      receivedAt: new Date(),
+      uniqNumber: `${this.bestLocation?.shortName}${this.uniqNumber}`
+    }, this.uniqNumber as number);
+
+    this.router.navigate(['admin/parcels']).then(() => {
+      this.router.navigate(['admin/parcels/add'])
+    })
   }
 }

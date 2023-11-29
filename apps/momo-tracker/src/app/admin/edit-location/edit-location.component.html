@@ -1,5 +1,5 @@
-    <h1>Ajouter un emplacement</h1>
-    <form [formGroup]="addForm" (ngSubmit)="add()">
+    <h1>Editer un emplacement</h1>
+    <form [formGroup]="editForm" (ngSubmit)="update()">
       <mat-form-field>
           <mat-label>Nom</mat-label>
           <input type="text" matInput formControlName="name" />
@@ -24,5 +24,5 @@
         </ng-container>
 
         <button mat-button>Annuler</button>
-        <button type="submit" mat-raised-button color="primary">Ajouter</button>
+        <button type="submit" mat-raised-button color="primary">Enregistrer</button>
     </form>

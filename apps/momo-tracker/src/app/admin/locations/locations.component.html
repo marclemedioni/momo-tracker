@@ -1,10 +1,15 @@
+<p>locations works!</p>
+<a routerLink="add">Add</a>
+
 <mat-card appearance="outlined" *ngFor="let location of locations$ | async; index as i">
           <mat-card-header>
             <mat-card-title>{{location.name}}</mat-card-title>
-            <mat-card-subtitle>{{location.numberOfParcels}} colis</mat-card-subtitle>
+            <mat-card-subtitle>{{location.capacity.small}} petits colis</mat-card-subtitle>
+            <mat-card-subtitle>{{location.capacity.medium}} colis moyens</mat-card-subtitle>
+            <mat-card-subtitle>{{location.capacity.large}} grands colis</mat-card-subtitle>
           </mat-card-header>
           <mat-card-actions align="end">
-            <button mat-button>Editer</button>
+            <button mat-button [routerLink]="['edit', location.id]">Editer</button>
             <button mat-button color="warn" (click)="remove(location)">Supprimer</button>
           </mat-card-actions>
         </mat-card>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Location } from '@momo-tracker/models';
+import { NonNullableFormBuilder } from '@angular/forms';
+import { LocationService } from '../../core/services/location.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mt-add-location',
@@ -8,16 +9,24 @@ import { Location } from '@momo-tracker/models';
   styleUrls: ['./add-location.component.scss'],
 })
 export class AddLocationComponent {
-  addForm = this.fb.nonNullable.group<Omit<Location, 'id'>>({
-    name: '',
-    numberOfParcels: 10,
+  addForm = this.fb.group({
+    name:  '',
+    shortName: '',
+    capacity: this.fb.group({
+      small: 0,
+      medium: 0,
+      large: 0
+    }),
   });
 
   constructor(
-    private fb: FormBuilder,
+    private readonly fb: NonNullableFormBuilder,
+    private locationService: LocationService,
+    private router: Router
   ) { }
 
-  add() {
-
+  async add() {
+    await this.locationService.add({ currentLoad: {small: 0, medium: 0, large: 0}, ...this.addForm.getRawValue() });
+    this.router.navigate(['admin/locations'])
   }
 }

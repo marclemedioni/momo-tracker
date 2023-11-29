@@ -1,5 +1,15 @@
 export interface Location {
   id?: number;
   name: string;
-  numberOfParcels: number;
+  shortName: string,
+  capacity: {
+    small: number,
+    medium: number,
+    large: number
+  },
+  currentLoad: {
+    small: number,
+    medium: number,
+    large: number
+  }
 }

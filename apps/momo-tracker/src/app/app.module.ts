@@ -11,10 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { RequesterModule } from './requester/requester.module';
 import { MaterialModule } from '../material.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent],
   imports: [
+    RouterModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

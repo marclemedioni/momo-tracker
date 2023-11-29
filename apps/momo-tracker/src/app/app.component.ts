@@ -1,5 +1,5 @@
 import { Component, isDevMode, OnInit } from '@angular/core';
-import { AppUpdateService  } from './core/app-update.service';
+import { AppUpdateService  } from './core/services/app-update.service';
 
 @Component({
   selector: 'mt-root',

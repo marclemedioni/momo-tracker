@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@momo-tracker/database": ["libs/database/src/index.ts"],
-      "@momo-tracker/models": ["libs/models/src/index.ts"]
+      "@momo-tracker/models": ["libs/models/src/index.ts"],
+      "@momo-tracker/storage-allocator": ["libs/storage-allocator/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

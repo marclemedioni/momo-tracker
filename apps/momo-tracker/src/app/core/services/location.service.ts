@@ -12,11 +12,23 @@ export class LocationService {
     return db.locations.toArray();
   }
 
-  addLocation(location: Location) {
+  getById(locationId: number) {
+    return db.locations.get(locationId)
+  }
+
+  add(location: Location) {
     return db.locations.add(location);
   }
 
-  removeLocationById(locationId: number) {
+  update(location: Location) {
+    if (!location.id) {
+      throw new Error("Unable to update location without ID")
+    }
+
+    return db.locations.update(location.id, location)
+  }
+
+  removeById(locationId: number) {
     return db.locations.delete(locationId);
   }
 }

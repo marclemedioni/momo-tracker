@@ -1,42 +1,23 @@
-import { Location, Parcel } from '@momo-tracker/models';
+import { Location, Parcel, UniqNumber } from '@momo-tracker/models';
 import { Dexie, Table } from 'dexie';
 
 export class AppDB extends Dexie {
   locations!: Table<Location, number>;
   parcels!: Table<Parcel, number>;
+  uniqNumbers!: Table<UniqNumber, number>;
 
   constructor() {
     super('momo');
-    this.version(1).stores({
-      locations: '++id',
-      parcels: '++id, recipient.lastName',
+    this.version(6).stores({
+      locations: '++id, name, shortName, capacity.small, capacity.medium, capacity.large, currentLoad.small, currentLoad.medium, currentLoad.large',
+      parcels: '++id, uniqNumber, size, receivedAt, locationId, recipient.firstName, recipient.lastName, image, uniqNumber',
+      uniqNumbers: '++id, shortName, uniqNumber, available',
     });
     this.on('populate', () => this.populate());
   }
 
   async populate() {
-    const locationId = await db.locations.add({
-      name: 'populated',
-      numberOfParcels: 42,
-    });
-    await db.parcels.bulkAdd([
-      {
-        locationId,
-        recipient: {
-          firstName: 'Yves',
-          lastName: 'Atrovite',
-        },
-        receivedAt: new Date(),
-      },
-      {
-        locationId,
-        recipient: {
-          firstName: 'Tata',
-          lastName: 'Yvette',
-        },
-        receivedAt: new Date(),
-      },
-    ]);
+
   }
 
   async resetDatabase() {
