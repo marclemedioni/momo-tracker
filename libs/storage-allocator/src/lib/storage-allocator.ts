@@ -1,7 +1,7 @@
 import { Location, Parcel } from "@momo-tracker/models";
 
 export class StorageAllocator {
-  private locations: Location[];
+  locations: Location[];
 
   constructor(locations: Location[]) {
     this.locations = locations;

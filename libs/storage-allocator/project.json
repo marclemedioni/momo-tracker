@@ -1,17 +1,17 @@
 {
   "name": "storage-allocator",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "storage-allocator/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/storage-allocator/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/storage-allocator",
-        "main": "storage-allocator/src/index.ts",
-        "tsConfig": "storage-allocator/tsconfig.lib.json",
-        "assets": ["storage-allocator/*.md"]
+        "outputPath": "dist/libs/storage-allocator",
+        "main": "libs/storage-allocator/src/index.ts",
+        "tsConfig": "libs/storage-allocator/tsconfig.lib.json",
+        "assets": ["libs/storage-allocator/*.md"]
       }
     },
     "lint": {
@@ -19,8 +19,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "storage-allocator/**/*.ts",
-          "storage-allocator/package.json"
+          "libs/storage-allocator/**/*.ts",
+          "libs/storage-allocator/package.json"
         ]
       }
     },
@@ -29,7 +29,7 @@
       "outputs": ["{options.reportsDirectory}"],
       "options": {
         "passWithNoTests": true,
-        "reportsDirectory": "../coverage/storage-allocator"
+        "reportsDirectory": "../../coverage/libs/storage-allocator"
       }
     }
   },
