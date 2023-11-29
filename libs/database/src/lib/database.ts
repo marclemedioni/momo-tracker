@@ -8,7 +8,7 @@ export class AppDB extends Dexie {
 
   constructor() {
     super('momo');
-    this.version(6).stores({
+    this.version(1).stores({
       locations: '++id, name, shortName, capacity.small, capacity.medium, capacity.large, currentLoad.small, currentLoad.medium, currentLoad.large',
       parcels: '++id, uniqNumber, size, receivedAt, locationId, recipient.firstName, recipient.lastName, image, uniqNumber',
       uniqNumbers: '++id, shortName, uniqNumber, available',
