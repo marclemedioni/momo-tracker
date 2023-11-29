@@ -10,7 +10,7 @@ export class AppDB extends Dexie {
     super('momo');
     this.version(1).stores({
       locations: '++id, name, shortName, capacity.small, capacity.medium, capacity.large, currentLoad.small, currentLoad.medium, currentLoad.large',
-      parcels: '++id, uniqNumber, size, receivedAt, locationId, recipient.firstName, recipient.lastName, image, uniqNumber',
+      parcels: '++id, uniqNumber, size, receivedAt, locationId, recipient.firstName, recipient.lastName, image',
       uniqNumbers: '++id, shortName, uniqNumber, available',
     });
     this.on('populate', () => this.populate());
